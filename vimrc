@@ -1,23 +1,20 @@
-" C-n 启动文件目录树
 " C-p 按照文件名字模糊搜索当前目录下文件
+
 " C-h vsp左右分屏时向左跳转光标
 " C-l vsp左右分屏时向右跳转光标
 " C-j sp上下分屏时向右跳转光标
 " C-k sp上下分屏时向右跳转光标
+
 " ,fu 列出本文件函数并模糊搜索，使用C-j / C-k 上下移动
 " ,sf 在文件夹内搜索光标所在处的关键字
-"
+
 " Golang begin
 " <Leader>i 显示函数定义
-" gd 查找函数的定义
-" C-i 跳转到函数定义处
-" <Leader>ds 显示函数定义并在下方新开窗口查看
-" <Leader>dv 显示函数定义并在右下新开窗口查看
-" <Leader>dt 新建标签
+" C-i | gd 跳转到函数定义处
 " Golang end
-"
-"
-" <Leader>[1..9] leader加数字键1-9跳转到相应标签页
+
+
+" command[1..9] command键加数字键1-9跳转到相应标签页
 
 "go get -u github.com/jstemmer/gotags
 "
@@ -206,6 +203,7 @@ map <C-l> <C-w>l
 :nn <D-6> 6gt
 :nn <D-7> 7gt
 :nn <D-8> 8gt
+:nn <D-9> 9gt
 
 "jump to last cursor position when opening a file
 autocmd BufReadPost * call SetCursorPosition()
