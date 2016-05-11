@@ -23,6 +23,7 @@
 "C-p 列出最近打开文件，输入当前文件夹下想打开的文件名称
 "C-j C-k 上下移动，当移动到想打开的文件C-t 在新的tab中打开文件
 "C-v 横向分屏打开文件
+" <Leader>c 检查语法，因为GO插件和syntastic 共用很慢，所以手动检查
 "
 "
 "在需要搜索的单词下面,sf可打开搜索框，同样C-j C-k上下移动，
@@ -129,6 +130,14 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'bling/vim-airline'
 
+
+
+Plugin 'Shougo/neocomplete'
+  let g:neocomplete#enable_smart_case = 1
+  let g:acp_enableAtStartup = 1
+  let g:neocomplete#enable_at_startup = 1
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
+
 Plugin 'fatih/vim-go'
   au FileType go nmap <Leader>gd <Plug>(go-doc)
   au FileType go nmap <Leader>s <Plug>(go-implements)
@@ -137,10 +146,15 @@ Plugin 'fatih/vim-go'
   let g:go_highlight_functions = 1
   let g:go_highlight_methods = 1
   let g:go_highlight_structs = 1
+  let g:go_highlight_interfaces = 1
   let g:go_highlight_operators = 1
-  let g:go_fmt_autosave = 1
   let g:go_highlight_build_constraints = 1
+
+  let g:go_fmt_autosave = 1
   let g:go_fmt_command = "goimports"
+  "let g:go_fmt_fail_silently = 1
+  "let g:syntastic_go_checkers = ['govet', 'golint', 'errcheck']
+  "let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -148,12 +162,8 @@ Plugin 'honza/vim-snippets'
   let g:UltiSnipsJumpForwardTrigger="<c-b>"
   let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-Bundle 'Shougo/neocomplete'
-  let g:neocomplete#enable_smart_case = 1
-  let g:acp_enableAtStartup = 0
-  let g:neocomplete#enable_at_startup = 1
-  let g:neocomplete#enable_smart_case = 1
-  let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+
 
 Plugin 'kien/ctrlp.vim'         
  let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
@@ -173,15 +183,33 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'flazz/vim-colorschemes'
 
 Plugin 'scrooloose/syntastic'
-let g:syntastic_error_symbol='>>'
-let g:syntastic_warning_symbol='>'
-let g:syntastic_check_on_open=0
-let g:syntastic_check_on_wq = 1
-let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_enable_highlighting = 0
-highlight SyntasticErrorSign guifg=white guibg=black
+  let g:syntastic_error_symbol='>>'
+  let g:syntastic_warning_symbol='>'
+  let g:syntastic_check_on_open=0
+  let g:syntastic_check_on_wq = 1
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_enable_highlighting = 0
+  let g:syntastic_go_checkers = ['go']
+  let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+  nmap <Leader>c :SyntasticCheck<CR>
+  highlight SyntasticErrorSign guifg=white guibg=black
+
+Plugin 'scrooloose/nerdtree'
+  map <C-n> :NERDTreeToggle<CR>
+
+"总是高亮显示对应的HTML标签
+Plugin 'Valloric/MatchTagAlways'
+  "nnoremap <leader>j :MtaJumpToOtherTag<cr>
+  "nnoremap <leader>j %
+  "let g:mta_use_matchparen_group =  0
+  "let set_default_matchtag_color = 0
+  "highlight MatchTag ctermfg=black ctermbg=lightgreen guifg=black guibg=lightgreen
+  "highlight MatchTag ctermfg=black ctermbg=93 guifg=black  guibg=93
+
+Plugin 'vim-scripts/matchit.zip'
 
 call vundle#end()
+
 filetype plugin indent on
 syntax on                             " syntax highlight
 
@@ -236,4 +264,6 @@ function! SetCursorPosition()
   endif
 endfunction
 
-set guifont=Monaco:h12
+"set guifont=Monaco:h12
+set guifont=Inconsolata:h14
+"set guifont=Courier:h16
