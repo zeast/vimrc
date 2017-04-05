@@ -130,19 +130,12 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'bling/vim-airline'
 
-
-
-Plugin 'Shougo/neocomplete'
-  let g:neocomplete#enable_smart_case = 1
-  let g:acp_enableAtStartup = 1
-  let g:neocomplete#enable_at_startup = 1
-  let g:neocomplete#sources#syntax#min_keyword_length = 3
-
 Plugin 'fatih/vim-go'
   au FileType go nmap <Leader>gd <Plug>(go-doc)
   au FileType go nmap <Leader>s <Plug>(go-implements)
   au FileType go nmap <Leader>i <Plug>(go-info)
   au FileType go nmap <Leader>e <Plug>(go-rename)
+  au FileType go nmap <Leader>b <Plug>(go-build)
   let g:go_highlight_functions = 1
   let g:go_highlight_methods = 1
   let g:go_highlight_structs = 1
@@ -157,6 +150,7 @@ Plugin 'fatih/vim-go'
   "let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 Plugin 'SirVer/ultisnips'
+
 Plugin 'honza/vim-snippets'
   let g:UltiSnipsExpandTrigger="<tab>"
   let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -207,6 +201,12 @@ Plugin 'Valloric/MatchTagAlways'
   "highlight MatchTag ctermfg=black ctermbg=93 guifg=black  guibg=93
 
 Plugin 'vim-scripts/matchit.zip'
+
+Plugin 'Shougo/neocomplete'
+  let g:acp_enableAtStartup = 1
+  let g:neocomplete#enable_smart_case = 1
+  let g:neocomplete#enable_at_startup = 1
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
 
 call vundle#end()
 
@@ -264,6 +264,15 @@ function! SetCursorPosition()
   endif
 endfunction
 
-"set guifont=Monaco:h12
-set guifont=Inconsolata:h14
+map fm :exe  "normal! gg=G"<CR>
+
+"autocmd BufWritePre *.rb call FormatRuby()
+"function! FormatRuby()
+"   exe "normal! gg=G"
+"endfunction
+
+
+set guifont=Monaco:h12
+"set guifont=Inconsolata:h14
 "set guifont=Courier:h16
+"
