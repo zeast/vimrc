@@ -145,6 +145,8 @@ Plugin 'fatih/vim-go'
 
   let g:go_fmt_autosave = 1
   let g:go_fmt_command = "goimports"
+  let g:go_jump_to_error = 1
+  let g:go_gocode_unimported_packages = 1
   "let g:go_fmt_fail_silently = 1
   "let g:syntastic_go_checkers = ['govet', 'golint', 'errcheck']
   "let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
@@ -175,6 +177,8 @@ Plugin 'Raimondi/delimitMate'
   let g:delimitMate_expand_space = 1
 
 Plugin 'flazz/vim-colorschemes'
+Plugin 'rakr/vim-one'
+Plugin 'morhetz/gruvbox'
 
 Plugin 'scrooloose/syntastic'
   let g:syntastic_error_symbol='>>'
@@ -202,21 +206,33 @@ Plugin 'Valloric/MatchTagAlways'
 
 Plugin 'vim-scripts/matchit.zip'
 
-Plugin 'Shougo/neocomplete'
-  let g:acp_enableAtStartup = 1
-  let g:neocomplete#enable_smart_case = 1
-  let g:neocomplete#enable_at_startup = 1
-  let g:neocomplete#sources#syntax#min_keyword_length = 3
+""Plugin 'Shougo/neocomplete'
+""  let g:acp_enableAtStartup = 1
+""  let g:neocomplete#enable_smart_case = 1
+""  let g:neocomplete#enable_at_startup = 1
+""  let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+Plugin 'Valloric/YouCompleteMe'
+  let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']
+  let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
 
 call vundle#end()
 
 filetype plugin indent on
 syntax on                             " syntax highlight
 
-colorscheme molokai
-let g:molokai_original = 1
-let g:rehash256 = 1
+"colorscheme molokai
+"let g:molokai_original = 1
+"let g:rehash256 = 1
 
+"colorscheme one
+"set background=dark
+"
+
+colorscheme gruvbox
+let g:gruvbox_italic=1
+set background=dark
+let g:gruvbox_contrast_dark = "hard"
 "VSP分屏的时候用来跳转窗口
 map <C-h> <C-w>h
 map <C-j> <C-w>j
@@ -276,3 +292,13 @@ set guifont=Monaco:h12
 "set guifont=Inconsolata:h14
 "set guifont=Courier:h16
 "
+au BufEnter * call MyLastWindow()
+function! MyLastWindow()
+  " if the window is quickfix go on
+  if &buftype=="quickfix"
+    " if this window is last on screen quit without warning
+    if winbufnr(2) == -1
+      quit!
+    endif
+  endif
+endfunction
