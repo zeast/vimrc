@@ -288,7 +288,7 @@ map fm :exe  "normal! gg=G"<CR>
 "endfunction
 
 
-set guifont=Monaco:h12
+set guifont=Consolas:h14
 "set guifont=Inconsolata:h14
 "set guifont=Courier:h16
 "
